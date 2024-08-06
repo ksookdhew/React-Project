@@ -1,13 +1,13 @@
 import {Product} from "../../models/Products.ts";
 
-const ProductCard = ({ product }: { product: Product }) => {
+const ProductCard = ({product}: { product: Product }) => {
     return (
         <div className="card bg-base-100 w-80 shadow-xl">
             <figure>
                 <img
                     className={"h-52"}
                     src={product.image}
-                    alt="Product" />
+                    alt="Product"/>
             </figure>
             <div className="card-body mb-10">
                 <h2 className="card-title">{product.title}</h2>
