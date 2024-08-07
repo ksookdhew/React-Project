@@ -1,4 +1,5 @@
 import {Product} from "../../models/Products.ts";
+import {formattedPrice} from "../../utils/productUtils.ts";
 
 const ProductCard = ({product}: { product: Product }) => {
     return (
@@ -10,8 +11,8 @@ const ProductCard = ({product}: { product: Product }) => {
                     alt="Product"/>
             </figure>
             <div className="card-body mb-10">
-                <h2 className="card-title">{product.title}</h2>
-                <p className="text-info text-xl">${product.price.toFixed(2)}</p>
+                <h3 className="text-md">{product.title}</h3>
+                <h2 className="card-title">{formattedPrice(product.price)}</h2>
             </div>
         </div>
     );
