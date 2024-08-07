@@ -6,13 +6,17 @@ const AllProducts = () => {
     const allProducts = useQuery({queryKey: ['allProducts'], queryFn: getAllProducts})
     const categories = useQuery({queryKey: ['categories'], queryFn: getAllCategories})
 
+    if (allProducts.isPending) return <div>Loading...</div>
+
+    if (allProducts.error) return <div>Error: {allProducts.error.message}</div>
+
     return (
         <div className="p-4">
             <div className="carousel carousel-center w-full space-x-4 self-center">
                 {
                     categories.data?.map((category) => (
-                        <div className="carousel-item">
-                        <button className="btn w-44">{category.toUpperCase()}</button>
+                        <div className="carousel-item" key={category}>
+                            <button className="btn w-44">{category.toUpperCase()}</button>
                         </div>
                     ))
                 }
