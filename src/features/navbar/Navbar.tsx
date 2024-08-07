@@ -24,7 +24,7 @@ const Navbar = () => {
                     </div>
                     <div className="mx-2 flex-1 px-2 text-xl">SHOP</div>
                     <div className="hidden flex-none lg:block">
-                        <ul className="menu menu-horizontal">
+                        <ul className="menu menu-horizontal text-xl">
                             {/* Navbar menu content here */}
                             <li><a>Wishlist</a></li>
                             <li><a>Cart</a></li>
@@ -35,7 +35,7 @@ const Navbar = () => {
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu bg-accent min-h-full w-80 p-4">
+                <ul className="menu bg-accent min-h-full w-80 p-4 text-3xl">
                     <li><a>Wishlist</a></li>
                     <li><a>Cart</a></li>
                 </ul>
