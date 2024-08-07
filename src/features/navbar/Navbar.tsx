@@ -1,5 +1,4 @@
-// import {Outlet} from "react-router-dom";
-import AllProducts from "../allProducts/AllProducts.tsx";
+import {Outlet} from "react-router-dom";
 
 const Navbar = () => {
     return (
@@ -32,7 +31,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                 </div>
-                <AllProducts/>
+                <Outlet/>
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
