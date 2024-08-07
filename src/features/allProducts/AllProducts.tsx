@@ -12,7 +12,7 @@ const AllProducts = () => {
                 {
                     categories.data?.map((category) => (
                         <div className="carousel-item">
-                        <button className="btn btn-accent w-44">{category.toUpperCase()}</button>
+                        <button className="btn w-44">{category.toUpperCase()}</button>
                         </div>
                     ))
                 }
