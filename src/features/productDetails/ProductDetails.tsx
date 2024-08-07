@@ -1,5 +1,5 @@
 import {formattedPrice} from "../../utils/productUtils.ts";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {useQuery} from "@tanstack/react-query";
 import {getProductWithId} from "../../services/api.ts";
 
@@ -15,8 +15,11 @@ const ProductDetails = () => {
     const product = productQuery.data
 
     return (
-        <div>
-            <div className="flex flex-col items-center justify-center w-full py-20">
+        <div className="p-4">
+            <Link to='/'>
+                <button className="btn btn-neutral">Back</button>
+            </Link>
+            <div className="flex flex-col items-center justify-center w-full py-12">
                 <div className="flex flex-wrap items-center justify-center self-center w-4/5 shadow-xl h-full">
                     <div className="w-full md:w-1/2">
                         <figure>
