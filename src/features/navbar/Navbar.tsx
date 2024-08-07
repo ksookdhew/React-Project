@@ -5,7 +5,6 @@ const Navbar = () => {
         <div className="drawer">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle"/>
             <div className="drawer-content flex flex-col">
-                {/* Navbar */}
                 <div className="navbar bg-accent w-full px-4">
                     <div className="flex-none lg:hidden">
                         <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost">
@@ -25,7 +24,6 @@ const Navbar = () => {
                     <div className="mx-2 flex-1 px-2 text-xl">SHOP</div>
                     <div className="hidden flex-none lg:block">
                         <ul className="menu menu-horizontal text-xl">
-                            {/* Navbar menu content here */}
                             <li><a>Wishlist</a></li>
                             <li><a>Cart</a></li>
                         </ul>
