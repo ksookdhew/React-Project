@@ -14,3 +14,8 @@ export async function getProductInCategory(category: string): Promise<Product[]>
     const response = await fetch(`https://fakestoreapi.com/products/category/${category}`);
     return await response.json();
 }
+
+export async function getProductWithId(id: string): Promise<Product> {
+    const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+    return await response.json();
+}
