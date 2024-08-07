@@ -38,14 +38,18 @@ const AllProducts = () => {
         <div className="p-4">
             <div className="carousel carousel-center w-full space-x-4 self-center">
                 <div className="carousel-item" key={"AllProducts"}>
-                    <button className="btn w-44" onClick={() => setSelectedCategory(null)}>
+                    <button className={`btn w-44 ${selectedCategory === null ? 'btn-neutral' : ''}`}
+                            onClick={() => setSelectedCategory(null)}>
                         ALL
                     </button>
                 </div>
                 {
                     categoriesQuery.data?.map((category) => (
                         <div className="carousel-item" key={category}>
-                            <button className="btn w-44" onClick={() => setSelectedCategory(category)}>
+                            <button
+                                className={`btn w-44 ${selectedCategory === category ? 'btn-neutral' : ''}`}
+                                onClick={() => setSelectedCategory(category)}
+                            >
                                 {category.toUpperCase()}
                             </button>
                         </div>
