@@ -1,29 +1,60 @@
 import {useQuery} from "@tanstack/react-query";
-import {getAllCategories, getAllProducts} from "../../services/api.ts";
+import {useState} from "react";
+import {getAllCategories, getAllProducts, getProductInCategory} from "../../services/api.ts";
 import ProductCard from "./ProductCard.tsx";
+import {Product} from "../../models/Products.ts";
 
 const AllProducts = () => {
-    const allProducts = useQuery({queryKey: ['allProducts'], queryFn: getAllProducts})
-    const categories = useQuery({queryKey: ['categories'], queryFn: getAllCategories})
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-    if (allProducts.isPending) return <div>Loading...</div>
+    const allProductsQuery = useQuery<Product[]>({
+        queryKey: ['allProducts'],
+        queryFn: getAllProducts,
+        enabled: !selectedCategory // Fetch all products only when no category is selected
+    });
 
-    if (allProducts.error) return <div>Error: {allProducts.error.message}</div>
+    const categoriesQuery = useQuery<string[]>({
+        queryKey: ['categories'],
+        queryFn: getAllCategories
+    });
+
+    const productsInCategoryQuery = useQuery<Product[]>({
+        queryKey: ['productsInCategory', selectedCategory],
+        queryFn: () => getProductInCategory(selectedCategory!),
+        enabled: !!selectedCategory // Fetch products in category only when a category is selected
+    });
+
+    if (allProductsQuery.isLoading || categoriesQuery.isLoading || (selectedCategory && productsInCategoryQuery.isLoading)) {
+        return <div>Loading...</div>;
+    }
+
+    if (allProductsQuery.error || categoriesQuery.error || productsInCategoryQuery.error) {
+        return <div>Error: {allProductsQuery.error?.message || categoriesQuery.error?.message || productsInCategoryQuery.error?.message}</div>;
+    }
+
+    const products: Product[] = selectedCategory ? productsInCategoryQuery?.data ?? [] : allProductsQuery?.data ?? [];
 
     return (
         <div className="p-4">
             <div className="carousel carousel-center w-full space-x-4 self-center">
+                <div className="carousel-item" key={"AllProducts"}>
+                    <button className="btn w-44" onClick={() => setSelectedCategory(null)}>
+                        ALL
+                    </button>
+                </div>
                 {
-                    categories.data?.map((category) => (
+                    categoriesQuery.data?.map((category) => (
                         <div className="carousel-item" key={category}>
-                            <button className="btn w-44">{category.toUpperCase()}</button>
+                            <button className="btn w-44" onClick={() => setSelectedCategory(category)}>
+                                {category.toUpperCase()}
+                            </button>
                         </div>
                     ))
                 }
             </div>
-            <div className="flex flex-wrap gap-4 p-4 justify-center overflow-y-auto">
+            <div className="flex flex-wrap gap-4 p-4 justify-start overflow-y-auto">
                 {
-                    allProducts.data?.map(product => (<ProductCard key={product.id} product={product}/>))
+                    products.map(product => (<ProductCard key={product.id} product={product}/>))
                 }
             </div>
         </div>
