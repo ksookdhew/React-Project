@@ -42,7 +42,7 @@ const Navbar = () => {
             <div className="drawer-side">
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu bg-neutral text-neutral-content min-h-full w-80 p-4 text-3xl">
-                    <li><Link to='/'>Products</Link></li>
+                    <li><Link to='suggest'>Suggest a Product</Link></li>
                     <li>
                         <Link to='cart'>
                             <LuShoppingCart/>Cart: {totalNumItems}
