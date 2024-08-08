@@ -24,11 +24,10 @@ const Navbar = () => {
                             </svg>
                         </label>
                     </div>
-                    <div className="mx-2 flex-1 px-2 text-xl">SHOP</div>
+                    <div className="mx-2 flex-1 px-2 text-xl"><Link to='/'> SHOP </Link></div>
                     <div className="hidden flex-none lg:block px-8">
                         <ul className="menu menu-horizontal text-xl">
-                            <li><Link to='/'>Products</Link></li>
-                            <li><a>Contact Us</a></li>
+                            <li><Link to='suggest'>Suggest a Product</Link></li>
                             <li><a><LuHeart/></a></li>
                             <li>
                                 <Link to='cart'>
