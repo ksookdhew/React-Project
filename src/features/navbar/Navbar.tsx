@@ -1,5 +1,5 @@
 import {Link, Outlet} from "react-router-dom";
-import {LuHeart, LuShoppingCart} from "react-icons/lu";
+import {LuShoppingCart} from "react-icons/lu";
 import {useCartStore} from "../cart/cartStore.ts";
 
 const Navbar = () => {
@@ -28,7 +28,6 @@ const Navbar = () => {
                     <div className="hidden flex-none lg:block px-8">
                         <ul className="menu menu-horizontal text-xl">
                             <li><Link to='suggest'>Suggest a Product</Link></li>
-                            <li><a><LuHeart/></a></li>
                             <li>
                                 <Link to='cart'>
                                     <LuShoppingCart/>
@@ -44,7 +43,6 @@ const Navbar = () => {
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu bg-neutral text-neutral-content min-h-full w-80 p-4 text-3xl">
                     <li><Link to='/'>Products</Link></li>
-                    <li><a>Wishlist <LuHeart/></a></li>
                     <li>
                         <Link to='cart'>
                             <LuShoppingCart/>Cart: {totalNumItems}
