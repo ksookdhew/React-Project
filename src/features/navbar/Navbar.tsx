@@ -1,7 +1,9 @@
 import {Link, Outlet} from "react-router-dom";
 import {LuHeart, LuShoppingCart} from "react-icons/lu";
+import {useCartStore} from "../cart/cartStore.ts";
 
 const Navbar = () => {
+    const totalNumItems = useCartStore((state) => state.cartNumItems);
     return (
         <div className="drawer">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle"/>
@@ -28,7 +30,12 @@ const Navbar = () => {
                             <li><Link to='/'>Products</Link></li>
                             <li><a>Contact Us</a></li>
                             <li><a><LuHeart/></a></li>
-                            <li><Link to='cart'><LuShoppingCart/></Link></li>
+                            <li>
+                                <Link to='cart'>
+                                    <LuShoppingCart/>
+                                    <span className="text-sm">Cart: {totalNumItems}</span>
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -36,10 +43,14 @@ const Navbar = () => {
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu bg-accent min-h-full w-80 p-4 text-3xl">
+                <ul className="menu bg-neutral text-neutral-content min-h-full w-80 p-4 text-3xl">
                     <li><Link to='/'>Products</Link></li>
                     <li><a>Wishlist <LuHeart/></a></li>
-                    <li><a>Cart <LuShoppingCart/></a></li>
+                    <li>
+                        <Link to='cart'>
+                            <LuShoppingCart/>Cart: {totalNumItems}
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </div>

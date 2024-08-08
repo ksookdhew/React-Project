@@ -8,6 +8,7 @@ import {formattedPrice} from "../../utils/productUtils.ts";
 
 const CartContainer = () => {
     const cartState = useCartStore((state) => state.cart);
+    const totalNumItems = useCartStore((state) => state.cartNumItems);
     const allProductsQuery = useQuery<Product[]>({
         queryKey: ['allProducts'],
         queryFn: getAllProducts
@@ -19,9 +20,9 @@ const CartContainer = () => {
         return runningTotal + productPrice * item.quantity;
     }, 0);
 
-    const totalNumItems = cartState.reduce((runningTotal, item) => {
-        return runningTotal + item.quantity;
-    }, 0);
+    // const totalNumItems = cartState.reduce((runningTotal, item) => {
+    //     return runningTotal + item.quantity;
+    // }, 0);
 
     return (
         <div className="p-4">
