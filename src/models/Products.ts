@@ -14,3 +14,10 @@ export interface Rating {
 }
 
 export type Categories = string []
+
+export interface ProductSuggestion {
+    title: string;
+    price: number;
+    description: string;
+    category: string;
+}
