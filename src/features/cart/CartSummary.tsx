@@ -1,7 +1,5 @@
-
-
-const CartSummary = ({total, numItems}: {total:string, numItems:number}) => {
-    return(
+const CartSummary = ({total, numItems}: { total: string, numItems: number }) => {
+    return (
         <div className="card bg-neutral text-neutral-content w-full max-w-96 px-4 h-52">
             <div className="card-body gap-4">
                 <h2 className="card-title">Cart Summary</h2>

@@ -20,10 +20,6 @@ const CartContainer = () => {
         return runningTotal + productPrice * item.quantity;
     }, 0);
 
-    // const totalNumItems = cartState.reduce((runningTotal, item) => {
-    //     return runningTotal + item.quantity;
-    // }, 0);
-
     return (
         <div className="p-4">
             <h1 className="text-4xl">Your Shopping Cart</h1>

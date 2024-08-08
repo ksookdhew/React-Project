@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import {create} from 'zustand';
 
 export interface CartItem {
     productId: number;
@@ -28,11 +28,11 @@ export const useCartStore = create<CartState>((set) => ({
         if (existingCartItem) {
             newCart = state.cart.map(item =>
                 item.productId === id
-                    ? { ...item, quantity: item.quantity + 1 }
+                    ? {...item, quantity: item.quantity + 1}
                     : item
             );
         } else {
-            newCart = [...state.cart, { productId: id, quantity: 1 }];
+            newCart = [...state.cart, {productId: id, quantity: 1}];
         }
 
         return {
@@ -48,7 +48,7 @@ export const useCartStore = create<CartState>((set) => ({
             if (existingCartItem.quantity > 1) {
                 newCart = state.cart.map(item =>
                     item.productId === id
-                        ? { ...item, quantity: item.quantity - 1 }
+                        ? {...item, quantity: item.quantity - 1}
                         : item
                 );
             } else {
