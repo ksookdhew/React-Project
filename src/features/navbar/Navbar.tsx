@@ -1,11 +1,12 @@
-import {Outlet} from "react-router-dom";
+import {Link, Outlet} from "react-router-dom";
+import {LuHeart, LuShoppingCart} from "react-icons/lu";
 
 const Navbar = () => {
     return (
         <div className="drawer">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle"/>
             <div className="drawer-content flex flex-col">
-                <div className="navbar bg-accent w-full px-4">
+                <div className="navbar bg-neutral text-neutral-content w-full px-4">
                     <div className="flex-none lg:hidden">
                         <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost">
                             <svg
@@ -22,10 +23,12 @@ const Navbar = () => {
                         </label>
                     </div>
                     <div className="mx-2 flex-1 px-2 text-xl">SHOP</div>
-                    <div className="hidden flex-none lg:block">
+                    <div className="hidden flex-none lg:block px-8">
                         <ul className="menu menu-horizontal text-xl">
-                            <li><a>Wishlist</a></li>
-                            <li><a>Cart</a></li>
+                            <li><Link to='/'>Products</Link></li>
+                            <li><a>Contact Us</a></li>
+                            <li><a><LuHeart/></a></li>
+                            <li><Link to='cart'><LuShoppingCart/></Link></li>
                         </ul>
                     </div>
                 </div>
@@ -34,8 +37,9 @@ const Navbar = () => {
             <div className="drawer-side">
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu bg-accent min-h-full w-80 p-4 text-3xl">
-                    <li><a>Wishlist</a></li>
-                    <li><a>Cart</a></li>
+                    <li><Link to='/'>Products</Link></li>
+                    <li><a>Wishlist <LuHeart/></a></li>
+                    <li><a>Cart <LuShoppingCart/></a></li>
                 </ul>
             </div>
         </div>
