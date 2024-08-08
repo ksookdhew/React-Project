@@ -2,6 +2,7 @@ import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {useQuery} from "@tanstack/react-query";
 import {getAllCategories} from "../../services/api.ts";
+import {useNavigate} from "react-router-dom";
 
 interface ProductSuggestion {
     title: string;
@@ -15,6 +16,8 @@ const SuggestProductForm = () => {
         queryKey: ['categories'],
         queryFn: getAllCategories
     });
+
+    const navigate = useNavigate();
 
     const formik = useFormik<ProductSuggestion>({
         initialValues: {
@@ -31,7 +34,8 @@ const SuggestProductForm = () => {
         }),
         onSubmit: (values) => {
             console.log('Form values:', values);
-            alert('Product suggested successfully!');
+            alert(`${values.title} Product suggested successfully!`);
+            navigate('/');
         }
     });
 
