@@ -4,8 +4,11 @@ import {useQuery} from "@tanstack/react-query";
 import {getAllCategories} from "../../services/api.ts";
 import {useNavigate} from "react-router-dom";
 import {ProductSuggestion} from "../../models/Products.ts";
+import SuccessSuggestFormAlert from "../alerts/successSuggestFormAlert.tsx";
+import {useState} from "react";
 
 const SuggestProductForm = () => {
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const categoriesQuery = useQuery<string[]>({
         queryKey: ['categories'], queryFn: getAllCategories
     });
@@ -24,16 +27,28 @@ const SuggestProductForm = () => {
                 .required('Description is required')
                 .min(5, 'Description must be at least 5 characters'), category: Yup.string()
                 .required('Category is required')
-        }), onSubmit: (values) => {
-            alert(`${values.title} Product suggested successfully!`);
-            navigate('/');
+        }), onSubmit: () => {
+            setShowSuccessAlert(true);
+
+            setTimeout(() => {
+                navigate('/');
+            }, 2000);
         }
     });
 
-    return (<div className="w-full flex justify-center p-4">
+    if (categoriesQuery.isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (categoriesQuery.error) {
+        return <div>Error: {categoriesQuery.error?.message}</div>;
+    }
+    return (
+
+        <div className="w-full flex justify-center p-4">
         <form onSubmit={formik.handleSubmit} className="p-4 shadow-xl rounded-lg bg-base-100 w-full md:w-1/3">
             <h1 className="text-4xl mb-4">Suggest a Product</h1>
-
+            {showSuccessAlert && <SuccessSuggestFormAlert productTitle={formik.values.title} />}
             <div className="mb-4">
                 <label htmlFor="title" className="block">Title</label>
                 <input
