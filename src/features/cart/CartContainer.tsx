@@ -22,16 +22,26 @@ const CartContainer = () => {
         return runningTotal + productPrice * item.quantity;
     }, 0);
 
+    if (allProductsQuery.isPending) return (
+        <div className="p-4 flex w-full h-60 justify-center items-center">
+            <span className="loading loading-dots loading-lg"></span>
+        </div>
+    );
+
+    if (allProductsQuery.error) return <div>Error: {allProductsQuery.error.message}</div>
+
     return (
         <div className="p-4">
             <h1 className="text-4xl">Your Shopping Cart</h1>
             {cartState.length === 0 ? (
-                <div className="card bg-base-100 w-96 shadow-xl">
-                    <div className="card-body">
-                        <h2 className="card-title">Your cart is empty</h2>
-                        <Link to="/">
-                            <button className="btn btn-primary">Continue shopping</button>
-                        </Link>
+                <div className="flex flex-col justify-center items-center">
+                    <div className="card bg-base-100 w-96 shadow-xl self-center justify-center">
+                        <div className="card-body gap-8 justify-center text-center">
+                            <h2 className="card-title text-2xl">Your cart is empty</h2>
+                            <Link to="/">
+                                <button className="btn btn-primary">Continue shopping</button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             ) : (
