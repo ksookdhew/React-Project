@@ -3,7 +3,7 @@ import {Link, useParams} from "react-router-dom";
 import {useQuery} from "@tanstack/react-query";
 import {getProductWithId} from "../../services/api.ts";
 import {useCartStore} from "../cart/cartStore.ts";
-import ProductDetailsLoader from "../skeletonLoaders/ProductDetailsLoader.tsx";
+import ProductDetailsLoader from "./ProductDetailsLoader.tsx";
 
 const ProductDetails = () => {
     const {productId} = useParams()
