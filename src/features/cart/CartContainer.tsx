@@ -40,7 +40,7 @@ const CartContainer = () => {
                         <div className="card-body gap-8 justify-center text-center">
                             <h2 className="card-title text-2xl">Your cart is empty</h2>
                             <Link to="/">
-                                <button className="btn btn-primary">Continue shopping</button>
+                                <button className="btn btn-primary hover:scale-110">Continue shopping</button>
                             </Link>
                         </div>
                     </div>
@@ -51,7 +51,7 @@ const CartContainer = () => {
                         {cartState.map((item) => (
                             <CartProductCard key={item.productId} cartItem={item}/>
                         ))}
-                        <button className="btn btn-neutral w-fit" onClick={clearCart}>Clear cart</button>
+                        <button className="btn btn-neutral w-fit hover:scale-110" onClick={clearCart}>Clear cart</button>
                     </div>
                     <div className="w-full md:w-1/3 ">
                         <CartSummary total={formattedPrice(totalPrice)} numItems={totalNumItems}/>

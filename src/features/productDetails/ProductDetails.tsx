@@ -22,7 +22,7 @@ const ProductDetails = () => {
     return (
         <div className="p-4">
             <Link to='/'>
-                <button className="btn btn-neutral">Back</button>
+                <button className="btn btn-neutral hover:scale-110">Back</button>
             </Link>
             <div className="flex flex-col items-center justify-center w-full py-12">
                 <div
@@ -38,10 +38,10 @@ const ProductDetails = () => {
                         <h2 className="text-3xl">{product?.title}</h2>
                         <h2 className="text-2xl">{formattedPrice(product?.price ?? 0)}</h2>
                         <div className="flex flex-wrap w-full gap-2 justify-center">
-                            <button className="w-full md:w-2/5 btn" onClick={() => addItemToCart(product?.id)}>Add to
+                            <button className="w-full md:w-2/5 btn hover:scale-105" onClick={() => addItemToCart(product?.id)}>Add to
                                 Cart
                             </button>
-                            <button className="w-full md:w-2/5 btn btn-neutral">Wishlist</button>
+                            <button className="w-full md:w-2/5 btn btn-neutral hover:scale-105">Wishlist</button>
                         </div>
                         <p>{product?.description}</p>
                     </div>
