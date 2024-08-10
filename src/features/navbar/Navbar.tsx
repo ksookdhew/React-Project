@@ -1,9 +1,18 @@
 import {Link, Outlet} from "react-router-dom";
-import {LuShoppingCart} from "react-icons/lu";
+import {LuHeart, LuShoppingCart} from "react-icons/lu";
 import {useCartStore} from "../cart/cartStore.ts";
+import {MdClose} from "react-icons/md";
 
 const Navbar = () => {
     const totalNumItems = useCartStore((state) => state.cartNumItems);
+
+    const closeDrawer = () => {
+        const drawerCheckbox = document.getElementById("my-drawer-3") as HTMLInputElement;
+        if (drawerCheckbox) {
+            drawerCheckbox.checked = false;
+        }
+    };
+
     return (
         <div className="drawer">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle"/>
@@ -29,6 +38,11 @@ const Navbar = () => {
                         <ul className="menu menu-horizontal text-xl">
                             <li><Link to='suggest'>Suggest a Product</Link></li>
                             <li>
+                                <Link to='wishlist'>
+                                    <LuHeart/>
+                                </Link>
+                            </li>
+                            <li>
                                 <Link to='cart'>
                                     <LuShoppingCart/>
                                     <span className="text-sm">Cart: {totalNumItems}</span>
@@ -42,10 +56,28 @@ const Navbar = () => {
             <div className="drawer-side">
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu bg-neutral text-neutral-content min-h-full w-80 p-4 text-3xl">
-                    <li><Link to='suggest'>Suggest a Product</Link></li>
+                    <li className="flex justify-end">
+                        <button
+                            aria-label="close sidebar"
+                            className="btn btn-square btn-ghost text-xl self-end"
+                            onClick={closeDrawer}
+                        >
+                            <MdClose/>
+                        </button>
+                    </li>
                     <li>
-                        <Link to='cart'>
-                            <LuShoppingCart/>Cart: {totalNumItems}
+                        <Link to='suggest' onClick={closeDrawer}>
+                            Suggest a Product
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to='wishlist' onClick={closeDrawer}>
+                            <LuHeart/>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to='cart' onClick={closeDrawer}>
+                            <LuShoppingCart/> Cart: {totalNumItems}
                         </Link>
                     </li>
                 </ul>
@@ -54,4 +86,4 @@ const Navbar = () => {
     );
 }
 
-export default Navbar
+export default Navbar;
