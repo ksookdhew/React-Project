@@ -2,6 +2,7 @@ import {CartItem, useCartStore} from "./cartStore.ts";
 import {useQuery} from "@tanstack/react-query";
 import {getProductWithId} from "../../services/api.ts";
 import {formattedPrice} from "../../utils/productUtils.ts";
+import CartItemLoader from "./CartItemLoader.tsx";
 
 const CartProductCard = ({cartItem}: { cartItem: CartItem }) => {
     const productQuery = useQuery({
@@ -12,7 +13,7 @@ const CartProductCard = ({cartItem}: { cartItem: CartItem }) => {
     const decreaseItemFromCart = useCartStore((state) => state.decreaseItem);
     const removeItemFromCart = useCartStore((state) => state.removeFromCart);
 
-    if (productQuery.isPending) return <div>Loading...</div>
+    if (productQuery.isPending) return <CartItemLoader/>
 
     if (productQuery.error) return <div>Error: {productQuery.error.message}</div>
 
