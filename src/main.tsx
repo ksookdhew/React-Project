@@ -7,6 +7,7 @@ import AllProducts from "./features/allProducts/AllProducts.tsx";
 import ErrorPage from "./features/error/Error.tsx";
 import ProductDetails from "./features/productDetails/ProductDetails.tsx";
 import CartContainer from "./features/cart/CartContainer.tsx";
+import SuggestProductForm from "./features/suggestProduct/SuggestProduct.tsx";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
             {
                 path: "cart",
                 element: <CartContainer/>,
+            },
+            {
+                path: "suggest",
+                element: <SuggestProductForm/>,
             },
             {
                 path: "*",
