@@ -46,14 +46,14 @@ const CartContainer = () => {
                     </div>
                 </div>
             ) : (
-                <div className="flex flex-wrap w-full shadow-xl h-full mr-2 mt-2">
-                    <div className="w-full md:w-2/3 flex flex-col self-center justify-start gap-8 px-6 ">
+                <div className="flex flex-wrap w-full h-full mr-2 mt-2">
+                    <div className="w-full md:w-2/3 flex flex-col justify-start gap-8 px-2">
                         {cartState.map((item) => (
                             <CartProductCard key={item.productId} cartItem={item}/>
                         ))}
                         <button className="btn btn-neutral w-fit" onClick={clearCart}>Clear cart</button>
                     </div>
-                    <div className="w-full md:w-1/3">
+                    <div className="w-full md:w-1/3 ">
                         <CartSummary total={formattedPrice(totalPrice)} numItems={totalNumItems}/>
                     </div>
                 </div>

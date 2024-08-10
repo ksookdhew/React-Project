@@ -25,7 +25,8 @@ const ProductDetails = () => {
                 <button className="btn btn-neutral">Back</button>
             </Link>
             <div className="flex flex-col items-center justify-center w-full py-12">
-                <div className="flex flex-wrap items-center justify-center self-center w-4/5 shadow-xl h-full">
+                <div
+                    className="flex flex-wrap items-center justify-center self-center w-full md:w-4/5 shadow-xl h-full">
                     <div className="w-full md:w-1/2">
                         <figure>
                             <img
