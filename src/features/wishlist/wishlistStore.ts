@@ -1,4 +1,5 @@
-import { create } from 'zustand';
+import {create} from 'zustand';
+import {persist} from 'zustand/middleware';
 
 export interface WishlistItem {
     productId: number;
@@ -11,31 +12,37 @@ export interface WishlistState {
     clearWishlist: () => void;
 }
 
-export const useWishlistStore = create<WishlistState>((set) => ({
-    wishlist: [],
-    addToWishlist: (id: number) => set((state) => {
-        const existingWishlistItem = state.wishlist.find(item => item.productId === id);
+export const useWishlistStore = create<WishlistState>()(
+    persist(
+        (set) => ({
+            wishlist: [],
+            addToWishlist: (id: number) => set((state) => {
+                const existingWishlistItem = state.wishlist.find(item => item.productId === id);
 
-        let newWishlist;
+                let newWishlist;
 
-        if (!existingWishlistItem) {
-            newWishlist = [...state.wishlist, { productId: id }];
-        } else {
-            // If the item already exists, no change is needed
-            newWishlist = state.wishlist;
+                if (!existingWishlistItem) {
+                    newWishlist = [...state.wishlist, {productId: id}];
+                } else {
+                    newWishlist = state.wishlist;
+                }
+
+                return {
+                    wishlist: newWishlist,
+                };
+            }),
+            removeFromWishlist: (id: number) => set((state) => {
+                const newWishlist = state.wishlist.filter(item => item.productId !== id);
+                return {
+                    wishlist: newWishlist,
+                };
+            }),
+            clearWishlist: () => set(() => ({
+                wishlist: [],
+            })),
+        }),
+        {
+            name: 'wishlist-storage',
         }
-
-        return {
-            wishlist: newWishlist,
-        };
-    }),
-    removeFromWishlist: (id: number) => set((state) => {
-        const newWishlist = state.wishlist.filter(item => item.productId !== id);
-        return {
-            wishlist: newWishlist,
-        };
-    }),
-    clearWishlist: () => set(() => ({
-        wishlist: [],
-    }))
-}));
+    )
+);
