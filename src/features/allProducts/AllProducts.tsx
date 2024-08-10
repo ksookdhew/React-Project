@@ -4,6 +4,7 @@ import {getAllCategories, getAllProducts, getProductInCategory} from "../../serv
 import ProductCard from "./ProductCard.tsx";
 import {Product} from "../../models/Products.ts";
 import ProductCardLoader from "./ProductCardLoader.tsx";
+import AppError from "../error/AppError.tsx";
 
 const AllProducts = () => {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -40,7 +41,7 @@ const AllProducts = () => {
     }
 
     if (allProductsQuery.error || categoriesQuery.error || productsInCategoryQuery.error) {
-        return <div>Error: {allProductsQuery.error?.message || categoriesQuery.error?.message || productsInCategoryQuery.error?.message}</div>;
+        return <AppError/>;
     }
 
     const products: Product[] = selectedCategory ? productsInCategoryQuery?.data ?? [] : allProductsQuery?.data ?? [];

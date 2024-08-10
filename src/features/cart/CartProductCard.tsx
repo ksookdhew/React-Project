@@ -3,6 +3,7 @@ import {useQuery} from "@tanstack/react-query";
 import {getProductWithId} from "../../services/api.ts";
 import {formattedPrice} from "../../utils/productUtils.ts";
 import CartItemLoader from "./CartItemLoader.tsx";
+import AppError from "../error/AppError.tsx";
 
 const CartProductCard = ({cartItem}: { cartItem: CartItem }) => {
     const productQuery = useQuery({
@@ -15,7 +16,7 @@ const CartProductCard = ({cartItem}: { cartItem: CartItem }) => {
 
     if (productQuery.isPending) return <CartItemLoader/>
 
-    if (productQuery.error) return <div>Error: {productQuery.error.message}</div>
+    if (productQuery.error) return <AppError/>;
 
     const product = productQuery.data
     return (

@@ -6,6 +6,7 @@ import {Product} from "../../models/Products.ts";
 import {getAllProducts} from "../../services/api.ts";
 import {formattedPrice} from "../../utils/productUtils.ts";
 import {Link} from "react-router-dom";
+import AppError from "../error/AppError.tsx";
 
 const CartContainer = () => {
     const cartState = useCartStore((state) => state.cart);
@@ -28,7 +29,7 @@ const CartContainer = () => {
         </div>
     );
 
-    if (allProductsQuery.error) return <div>Error: {allProductsQuery.error.message}</div>
+    if (allProductsQuery.error) return <AppError/>;
 
     return (
         <div className="p-4">

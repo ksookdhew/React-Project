@@ -4,6 +4,7 @@ import {useQuery} from "@tanstack/react-query";
 import {getProductWithId} from "../../services/api.ts";
 import {useCartStore} from "../cart/cartStore.ts";
 import ProductDetailsLoader from "./ProductDetailsLoader.tsx";
+import AppError from "../error/AppError.tsx";
 
 const ProductDetails = () => {
     const {productId} = useParams()
@@ -12,7 +13,7 @@ const ProductDetails = () => {
 
     if (productQuery.isPending) return (<ProductDetailsLoader/>);
 
-    if (productQuery.error) return <div>Error: {productQuery.error.message}</div>
+    if (productQuery.error) return <AppError/>;
 
     const product = productQuery.data
 
