@@ -3,6 +3,8 @@ import {useState} from "react";
 import {getAllCategories, getAllProducts, getProductInCategory} from "../../services/api.ts";
 import ProductCard from "./ProductCard.tsx";
 import {Product} from "../../models/Products.ts";
+import ProductCardLoader from "./ProductCardLoader.tsx";
+import AppError from "../error/AppError.tsx";
 
 const AllProducts = () => {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -25,11 +27,21 @@ const AllProducts = () => {
     });
 
     if (allProductsQuery.isLoading || categoriesQuery.isLoading || (selectedCategory && productsInCategoryQuery.isLoading)) {
-        return <div>Loading...</div>;
+        return (
+            <div className="p-4">
+                <div className="flex flex-wrap gap-4 p-4 justify-start overflow-y-auto">
+                    {
+                        Array.from({length: 10}).map((_, index) => (
+                            <ProductCardLoader key={index}/>
+                        ))
+                    }
+                </div>
+            </div>
+        );
     }
 
     if (allProductsQuery.error || categoriesQuery.error || productsInCategoryQuery.error) {
-        return <div>Error: {allProductsQuery.error?.message || categoriesQuery.error?.message || productsInCategoryQuery.error?.message}</div>;
+        return <AppError/>;
     }
 
     const products: Product[] = selectedCategory ? productsInCategoryQuery?.data ?? [] : allProductsQuery?.data ?? [];
