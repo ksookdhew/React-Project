@@ -29,7 +29,7 @@ const WishlistProductCard = ({ wishlistItem }: { wishlistItem: WishlistItem }) =
             </figure>
             <div className="card-body">
                 <div className="card-actions justify-end">
-                    <button className="btn btn-square btn-sm" onClick={() => removeItemFromWishlist(product?.id)}>
+                    <button className="btn btn-square btn-sm hover:scale-110" onClick={() => removeItemFromWishlist(product?.id)}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
@@ -48,7 +48,7 @@ const WishlistProductCard = ({ wishlistItem }: { wishlistItem: WishlistItem }) =
                 <p>{formattedPrice(product?.price)}</p>
                 <div className="card-actions justify-end">
                     <button
-                        className="btn btn-primary"
+                        className="btn btn-primary hover:scale-110"
                         onClick={() => {
                             addItemToCart(product?.id);
                             removeItemFromWishlist(product?.id);

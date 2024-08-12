@@ -26,7 +26,7 @@ const ProductDetails = () => {
     return (
         <div className="p-4">
             <Link to='/'>
-                <button className="btn btn-neutral">Back</button>
+                <button className="btn btn-neutral hover:scale-105">Back</button>
             </Link>
             <div className="flex flex-col items-center justify-center w-full py-12">
                 <div
@@ -43,12 +43,12 @@ const ProductDetails = () => {
                         <p className="text-2xl">{formattedPrice(product?.price ?? 0)}</p>
                         <div className="flex flex-wrap w-full gap-2 justify-center">
                             <button
-                                className="w-full md:w-2/5 btn btn-primary"
+                                className="w-full md:w-2/5 btn btn-primary hover:scale-105"
                                 onClick={() => addItemToCart(product?.id)}
                             >
                                 Add to Cart
                             </button>
-                            <button className={`w-full md:w-2/5 btn ${isInWishlist ? "btn-neutral" : ""}`}
+                            <button className={`w-full hover:scale-105 md:w-2/5 btn ${isInWishlist ? "btn-neutral" : ""}`}
                                     onClick={isInWishlist ? () => removeFromWishlist(product?.id) : () => addToWishlist(product?.id)}
                             >
                                 {isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
