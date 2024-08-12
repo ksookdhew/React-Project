@@ -3,23 +3,44 @@ import {useCartStore} from "../cart/cartStore.ts";
 import {useQuery} from "@tanstack/react-query";
 import {getProductWithId} from "../../services/api.ts";
 import {formattedPrice} from "../../utils/productUtils.ts";
-import WishlistItemLoader from "./WishlistItemLoader.tsx";
-import AppError from "../error/AppError.tsx";
+import React, {Suspense} from "react";
+
+const WishlistItemLoader = React.lazy(() => import("./WishlistItemLoader.tsx"));
+const AppError = React.lazy(() => import("../error/AppError.tsx"));
 
 const WishlistProductCard = ({wishlistItem}: { wishlistItem: WishlistItem }) => {
     const productQuery = useQuery({
         queryKey: [wishlistItem.productId],
-        queryFn: () => getProductWithId(`${wishlistItem.productId}` ?? '')
+        queryFn: () => getProductWithId(`${wishlistItem.productId}`),
     });
 
     const removeItemFromWishlist = useWishlistStore((state) => state.removeFromWishlist);
     const addItemToCart = useCartStore((state) => state.addItem);
 
-    if (productQuery.isPending) return <WishlistItemLoader/>;
+    if (productQuery.isLoading) {
+        return (
+            <Suspense fallback={<div>Loading...</div>}>
+                <WishlistItemLoader/>
+            </Suspense>
+        );
+    }
 
-    if (productQuery.error) return <AppError/>;
+    if (productQuery.error) {
+        return (
+            <Suspense fallback={<div>Error</div>}>
+                <AppError/>
+            </Suspense>
+        );
+    }
 
     const product = productQuery.data;
+    if (!product) {
+        return (
+            <Suspense fallback={<div>Product not found</div>}>
+                <AppError/>
+            </Suspense>
+        );
+    }
 
     return (
         <div className="card card-side bg-base-100 shadow-xl w-full">
