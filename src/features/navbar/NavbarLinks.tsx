@@ -21,9 +21,7 @@ const NavbarLinks = ({closeDrawer}: { closeDrawer: () => void }) => {
             <li>
                 <Link to="cart" onClick={closeDrawer} aria-label="Cart">
                     <LuShoppingCart/>
-                    {totalNumItems > 0 && (
-                        <span className="text-md">Cart: {totalNumItems}</span>
-                    )}
+                    <span className="text-md">Cart: {totalNumItems}</span>
                 </Link>
             </li>
         </>

@@ -1,12 +1,13 @@
-import {useMemo, useState} from "react";
+import React, {Suspense, useMemo, useState} from "react";
 import {formattedPrice} from "../../utils/productUtils.ts";
 import {Link, useParams} from "react-router-dom";
 import {useQuery} from "@tanstack/react-query";
 import {getProductWithId} from "../../services/api.ts";
 import {useCartStore} from "../cart/cartStore.ts";
-import ProductDetailsLoader from "./ProductDetailsLoader.tsx";
-import AppError from "../error/AppError.tsx";
 import {useWishlistStore} from "../wishlist/wishlistStore.ts";
+
+const AppError = React.lazy(() => import("../error/AppError.tsx"));
+const ProductDetailsLoader = React.lazy(() => import("./ProductDetailsLoader.tsx"));
 
 const ProductDetails = () => {
     const {productId} = useParams();
@@ -33,11 +34,30 @@ const ProductDetails = () => {
         }, 1000);
     };
 
-    if (isLoading) return <ProductDetailsLoader/>;
+    if (isLoading) {
+        return (
+            <Suspense fallback={<div>Loading...</div>}>
+                <ProductDetailsLoader/>
+            </Suspense>
+        );
+    }
 
-    if (error) return <AppError/>;
+    if (error) {
+        return (
+            <Suspense fallback={<div>Failed to load product details.</div>}>
+                <AppError/>
+            </Suspense>
+        );
+    }
 
-    if (!product) return <AppError/>;
+    if (!product) {
+        return (
+            <Suspense fallback={<div>Product not found.</div>}>
+                <AppError/>
+            </Suspense>
+        );
+    }
+
 
     return (
         <div className="p-4">
