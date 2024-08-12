@@ -15,6 +15,7 @@ const NavbarLinks = ({closeDrawer}: { closeDrawer: () => void }) => {
             <li>
                 <Link to="wishlist" onClick={closeDrawer} aria-label="Wishlist">
                     <LuHeart/>
+                    <span className="text-md">Wishlist</span>
                 </Link>
             </li>
             <li>
