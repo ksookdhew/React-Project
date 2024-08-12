@@ -48,7 +48,9 @@ const CartProductCard = ({ cartItem }: { cartItem: CartItem }) => {
                 <img
                     className={"w-full"}
                     src={product.image}
-                    alt="Product"/>
+                    alt="Product"
+                    loading="lazy"
+                />
             </figure>
             <div className="card-body">
                 <div className="card-actions justify-end">

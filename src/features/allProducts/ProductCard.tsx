@@ -10,7 +10,9 @@ const ProductCard = ({product}: { product: Product }) => {
                     <img
                         className={"h-56"}
                         src={product.image}
-                        alt="Product"/>
+                        alt="Product"
+                        loading="lazy"
+                    />
                 </figure>
                 <div className="card-body mb-10">
                     <h3 className="text-md">{product.title}</h3>

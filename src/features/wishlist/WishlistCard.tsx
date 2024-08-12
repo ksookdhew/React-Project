@@ -48,7 +48,9 @@ const WishlistProductCard = ({wishlistItem}: { wishlistItem: WishlistItem }) => 
                 <img
                     className={"w-full"}
                     src={product?.image}
-                    alt="Product"/>
+                    alt="Product"
+                    loading="lazy"
+                />
             </figure>
             <div className="card-body">
                 <div className="card-actions justify-end">
