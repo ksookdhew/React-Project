@@ -6,7 +6,9 @@ import {Product} from "../../models/Products.ts";
 import {getAllProducts} from "../../services/api.ts";
 import {formattedPrice} from "../../utils/productUtils.ts";
 import {Link} from "react-router-dom";
-import AppError from "../error/AppError.tsx";
+import React, {Suspense} from "react";
+
+const AppError = React.lazy(() => import("../error/AppError.tsx"));
 
 const CartContainer = () => {
     const cartState = useCartStore((state) => state.cart);
@@ -29,7 +31,13 @@ const CartContainer = () => {
         </div>
     );
 
-    if (allProductsQuery.error) return <AppError/>;
+    if (allProductsQuery.error) {
+        return (
+            <Suspense fallback={<div>Loading...</div>}>
+                <AppError />
+            </Suspense>
+        );
+    }
 
     return (
         <div className="p-4">
