@@ -13,16 +13,12 @@ const ProductDetails = () => {
     const productQuery = useQuery({queryKey: [productId], queryFn: () => getProductWithId(productId ?? '')});
 
     const addItemToCart = useCartStore((state) => state.addItem);
-    const {wishlist, addToWishlist, removeFromWishlist} = useWishlistStore((state) => ({
-        wishlist: state.wishlist,
-        addToWishlist: state.addToWishlist,
-        removeFromWishlist: state.removeFromWishlist,
-    }));
+    const {wishlist, addToWishlist, removeFromWishlist} = useWishlistStore();
+
 
     if (productQuery.isPending) return (<ProductDetailsLoader/>);
 
     if (productQuery.error) return <AppError/>;
-
 
     const product = productQuery.data;
     const isInWishlist = wishlist.some(item => item.productId === product?.id);
@@ -43,8 +39,8 @@ const ProductDetails = () => {
                         </figure>
                     </div>
                     <div className="w-full md:w-1/2 flex flex-col self-center gap-8 px-6 py-12">
-                        <h2 className="text-3xl">{product?.title}</h2>
-                        <h2 className="text-2xl">{formattedPrice(product?.price ?? 0)}</h2>
+                        <p className="text-3xl">{product?.title}</p>
+                        <p className="text-2xl">{formattedPrice(product?.price ?? 0)}</p>
                         <div className="flex flex-wrap w-full gap-2 justify-center">
                             <button
                                 className="w-full md:w-2/5 btn btn-primary"
@@ -52,21 +48,11 @@ const ProductDetails = () => {
                             >
                                 Add to Cart
                             </button>
-                            {isInWishlist ? (
-                                <button
-                                    className="w-full md:w-2/5 btn btn-neutral"
-                                    onClick={() => removeFromWishlist(product?.id)}
-                                >
-                                    Remove from Wishlist
-                                </button>
-                            ) : (
-                                <button
-                                    className="w-full md:w-2/5 btn"
-                                    onClick={() => addToWishlist(product?.id)}
-                                >
-                                    Add to Wishlist
-                                </button>
-                            )}
+                            <button className={`w-full md:w-2/5 btn ${isInWishlist ? "btn-neutral" : ""}`}
+                                    onClick={isInWishlist ? () => removeFromWishlist(product?.id) : () => addToWishlist(product?.id)}
+                            >
+                                {isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
+                            </button>
                         </div>
                         <p>{product?.description}</p>
                     </div>

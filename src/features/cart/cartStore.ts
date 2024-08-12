@@ -26,7 +26,7 @@ export const useCartStore = create<CartState>()(
             cartNumItems: 0,
             addItem: (id: number) => set((state) => {
                 const existingCartItem = state.cart.find(item => item.productId === id);
-                let newCart;
+                let newCart: CartItem[]
 
                 if (existingCartItem) {
                     newCart = state.cart.map(item =>
@@ -45,7 +45,7 @@ export const useCartStore = create<CartState>()(
             }),
             decreaseItem: (id: number) => set((state) => {
                 const existingCartItem = state.cart.find(item => item.productId === id);
-                let newCart;
+                let newCart: CartItem[] = []
 
                 if (existingCartItem) {
                     if (existingCartItem.quantity > 1) {

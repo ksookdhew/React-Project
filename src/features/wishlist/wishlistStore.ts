@@ -18,8 +18,7 @@ export const useWishlistStore = create<WishlistState>()(
             wishlist: [],
             addToWishlist: (id: number) => set((state) => {
                 const existingWishlistItem = state.wishlist.find(item => item.productId === id);
-
-                let newWishlist;
+                let newWishlist: WishlistItem[]
 
                 if (!existingWishlistItem) {
                     newWishlist = [...state.wishlist, {productId: id}];

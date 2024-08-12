@@ -1,11 +1,9 @@
-import { Link, Outlet } from "react-router-dom";
-import { LuHeart, LuShoppingCart } from "react-icons/lu";
-import { MdClose } from "react-icons/md";
-import { useCartStore } from "../cart/cartStore.ts";
-import { useRef } from "react";
+import {Link, Outlet} from "react-router-dom";
+import {MdClose} from "react-icons/md";
+import {useRef} from "react";
+import NavbarLinks from "./NavbarLinks.tsx";
 
 const Navbar = () => {
-    const totalNumItems = useCartStore((state) => state.cartNumItems);
     const drawerRef = useRef<HTMLInputElement>(null);
 
     const closeDrawer = () => {
@@ -14,32 +12,9 @@ const Navbar = () => {
         }
     };
 
-    const NavbarLinks = () => (
-        <>
-            <li>
-                <Link to="suggest" onClick={closeDrawer}>
-                    Suggest a Product
-                </Link>
-            </li>
-            <li>
-                <Link to="wishlist" onClick={closeDrawer} aria-label="Wishlist">
-                    <LuHeart />
-                </Link>
-            </li>
-            <li>
-                <Link to="cart" onClick={closeDrawer} aria-label="Cart">
-                    <LuShoppingCart />
-                    {totalNumItems > 0 && (
-                        <span className="text-md">Cart: {totalNumItems}</span>
-                    )}
-                </Link>
-            </li>
-        </>
-    );
-
     return (
         <div className="drawer">
-            <input id="my-drawer-3" type="checkbox" className="drawer-toggle" ref={drawerRef} />
+            <input id="my-drawer-3" type="checkbox" className="drawer-toggle" ref={drawerRef}/>
             <div className="drawer-content flex flex-col">
                 <div className="navbar bg-neutral text-neutral-content w-full px-4">
                     <div className="flex-none lg:hidden">
@@ -64,11 +39,11 @@ const Navbar = () => {
                     </div>
                     <div className="hidden flex-none lg:block px-8">
                         <ul className="menu menu-horizontal text-xl">
-                            <NavbarLinks />
+                            <NavbarLinks closeDrawer={closeDrawer}/>
                         </ul>
                     </div>
                 </div>
-                <Outlet />
+                <Outlet/>
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
@@ -79,10 +54,10 @@ const Navbar = () => {
                             className="btn btn-square btn-ghost text-xl self-end"
                             onClick={closeDrawer}
                         >
-                            <MdClose />
+                            <MdClose/>
                         </button>
                     </li>
-                    <NavbarLinks />
+                    <NavbarLinks closeDrawer={closeDrawer}/>
                 </ul>
             </div>
         </div>
