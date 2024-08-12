@@ -1,10 +1,12 @@
-import { WishlistItem, useWishlistStore } from "./wishlistStore.ts";
-import { useCartStore } from "../cart/cartStore.ts";
-import { useQuery } from "@tanstack/react-query";
-import { getProductWithId } from "../../services/api.ts";
-import { formattedPrice } from "../../utils/productUtils.ts";
+import {useWishlistStore, WishlistItem} from "./wishlistStore.ts";
+import {useCartStore} from "../cart/cartStore.ts";
+import {useQuery} from "@tanstack/react-query";
+import {getProductWithId} from "../../services/api.ts";
+import {formattedPrice} from "../../utils/productUtils.ts";
+import WishlistItemLoader from "./WishlistItemLoader.tsx";
+import AppError from "../error/AppError.tsx";
 
-const WishlistProductCard = ({ wishlistItem }: { wishlistItem: WishlistItem }) => {
+const WishlistProductCard = ({wishlistItem}: { wishlistItem: WishlistItem }) => {
     const productQuery = useQuery({
         queryKey: [wishlistItem.productId],
         queryFn: () => getProductWithId(`${wishlistItem.productId}` ?? '')
@@ -13,9 +15,9 @@ const WishlistProductCard = ({ wishlistItem }: { wishlistItem: WishlistItem }) =
     const removeItemFromWishlist = useWishlistStore((state) => state.removeFromWishlist);
     const addItemToCart = useCartStore((state) => state.addItem);
 
-    if (productQuery.isPending) return <div>Loading...</div>;
+    if (productQuery.isPending) return <WishlistItemLoader/>;
 
-    if (productQuery.error) return <div>Error: {productQuery.error.message}</div>;
+    if (productQuery.error) return <AppError/>;
 
     const product = productQuery.data;
 
@@ -25,11 +27,12 @@ const WishlistProductCard = ({ wishlistItem }: { wishlistItem: WishlistItem }) =
                 <img
                     className={"w-full"}
                     src={product?.image}
-                    alt="Product" />
+                    alt="Product"/>
             </figure>
             <div className="card-body">
                 <div className="card-actions justify-end">
-                    <button className="btn btn-square btn-sm hover:scale-110" onClick={() => removeItemFromWishlist(product?.id)}>
+                    <button className="btn btn-square btn-sm hover:scale-110"
+                            onClick={() => removeItemFromWishlist(product?.id)}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
@@ -40,7 +43,7 @@ const WishlistProductCard = ({ wishlistItem }: { wishlistItem: WishlistItem }) =
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2"
-                                d="M6 18L18 6M6 6l12 12" />
+                                d="M6 18L18 6M6 6l12 12"/>
                         </svg>
                     </button>
                 </div>
