@@ -29,7 +29,7 @@ const CartProductCard = ({cartItem}: { cartItem: CartItem }) => {
             </figure>
             <div className="card-body">
                 <div className="card-actions justify-end">
-                    <button className="btn btn-square btn-sm" onClick={() => removeItemFromCart(product?.id)}>
+                    <button className="btn btn-square btn-sm hover:scale-110" onClick={() => removeItemFromCart(product?.id)}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
@@ -47,10 +47,10 @@ const CartProductCard = ({cartItem}: { cartItem: CartItem }) => {
                 <h2 className="card-title">{product?.title}</h2>
                 <p>{formattedPrice(product?.price)}</p>
                 <div className="card-actions justify-end w-fit">
-                    <button className="btn btn-primary btn-sm" onClick={() => decreaseItemFromCart(product?.id)}>-
+                    <button className="btn btn-primary btn-sm hover:scale-110" onClick={() => decreaseItemFromCart(product?.id)}>-
                     </button>
                     <p className="self-center text-2xl">{cartItem.quantity} </p>
-                    <button className="btn btn-primary btn-sm" onClick={() => addItemToCart(product?.id)}>+</button>
+                    <button className="btn btn-primary btn-sm hover:scale-110" onClick={() => addItemToCart(product?.id)}>+</button>
                 </div>
             </div>
         </div>

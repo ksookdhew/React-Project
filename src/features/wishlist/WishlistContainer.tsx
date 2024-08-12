@@ -15,7 +15,7 @@ const WishlistContainer = () => {
                         <div className="card-body gap-8 justify-center text-center">
                             <h2 className="card-title text-2xl">Your Wishlist is empty</h2>
                             <Link to="/">
-                                <button className="btn btn-primary">Continue browsing</button>
+                                <button className="btn btn-primary hover:scale-110">Continue browsing</button>
                             </Link>
                         </div>
                     </div>
@@ -26,7 +26,7 @@ const WishlistContainer = () => {
                         {wishlistState.map((item) => (
                             <WishlistProductCard key={item.productId} wishlistItem={item}/>
                         ))}
-                        <button className="btn btn-neutral w-fit" onClick={clearWishlist}>Clear wishlist</button>
+                        <button className="btn btn-neutral w-fit hover:scale-110" onClick={clearWishlist}>Clear wishlist</button>
                     </div>
                 </div>
             )}
